@@ -1,9 +1,8 @@
+streamlit
+pandas
 numpy
-pandas 
-random
 matplotlib
-datetime 
-timedelta
+
 
 
 
