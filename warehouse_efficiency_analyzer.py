@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import random
 from datetime import datetime, timedelta
 
@@ -37,20 +38,31 @@ def analyze_efficiency(data):
     }
     return summary
 
-# Export usage metrics to CSV
-def export_metrics_to_csv(data, filename="warehouse_usage_data.csv"):
-    data.to_csv(filename, index=False)
+# Visualize usage metrics
+def visualize_metrics(data):
+    plt.figure(figsize=(12, 6))
+    plt.plot(data['Timestamp'], data['CPU_Usage'], label='CPU Usage (%)')
+    plt.plot(data['Timestamp'], data['Memory_Usage'], label='Memory Usage (%)')
+    plt.xlabel('Time')
+    plt.ylabel('Usage (%)')
+    plt.title('Warehouse CPU and Memory Usage Over Time')
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig("warehouse_usage_plot.png")
+    plt.close()
 
 # Main execution
-data = generate_synthetic_data()
-summary = analyze_efficiency(data)
-export_metrics_to_csv(data)
+if __name__ == "__main__":
+    data = generate_synthetic_data()
+    summary = analyze_efficiency(data)
+    visualize_metrics(data)
 
-# Print summary
-print("Warehouse Efficiency Analysis Summary:")
-for key, value in summary.items():
-    if isinstance(value, list):
-        for rec in value:
-            print(f"- {rec}")
-    else:
-        print(f"{key}: {value}")
+    # Print summary
+    print("Warehouse Efficiency Analysis Summary:")
+    for key, value in summary.items():
+        if isinstance(value, list):
+            for rec in value:
+                print(f"- {rec}")
+        else:
+            print(f"{key}: {value}")
+
