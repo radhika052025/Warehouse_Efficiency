@@ -1,8 +1,10 @@
 numpy
 pandas 
 random
+matplotlib.pyplot
 datetime 
 timedelta
+
 
 
 
